@@ -1,0 +1,38 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/courses":
+    post:
+      summary: Creates a course
+      tags:
+      - Courses
+      parameters: []
+      responses:
+        '201':
+          description: course created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                end_on:
+                  type: date
+              required:
+              - title
+              - description
+              - end_on
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

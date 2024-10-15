@@ -1,0 +1,138 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/courses":
+    post:
+      summary: Creates a course
+      tags:
+      - Courses
+      parameters: []
+      responses:
+        '201':
+          description: created
+        '422':
+          description: invalid_request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                end_on:
+                  type: string
+              required:
+              - title
+              - description
+              - end_on
+    get:
+      summary: list courses
+      tags:
+      - Courses
+      responses:
+        '200':
+          description: success
+  "/api/v1/courses/{id}":
+    get:
+      summary: Retrieves a course
+      tags:
+      - Courses
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  end_on:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - title
+                - description
+                - end_on
+        '404':
+          description: not_found
+    put:
+      summary: Update course by id
+      tags:
+      - Courses
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: success
+        '404':
+          description: not_found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                end_on:
+                  type: string
+              required:
+              - title
+              - description
+              - end_on
+  "/api/v1/movies":
+    post:
+      summary: Creates a movie
+      tags:
+      - Movies
+      parameters: []
+      responses:
+        '201':
+          description: created
+        '422':
+          description: invalid_request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: integer
+                url:
+                  type: string
+              required:
+              - course_id
+              - url
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3001

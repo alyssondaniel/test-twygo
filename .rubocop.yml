@@ -1,0 +1,10 @@
+AllCops:
+  TargetRubyVersion: 3.3.0
+  NewCops: enable
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
+inherit_from: .rubocop_todo.yml
